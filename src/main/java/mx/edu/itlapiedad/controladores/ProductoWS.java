@@ -42,5 +42,17 @@ public class ProductoWS {
 		return new ResponseEntity<List<Productos>>(resultado, HttpStatus.OK);
 	}
 	
+	@GetMapping("/productos/{id}")
+	public ResponseEntity<?> buscar(@PathVariable int id){
+		Productos resultado;
+		try {
+			resultado = servicio.buscar(id);
+			
+		}catch(DataAccessException e) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Productos>(resultado,HttpStatus.OK);
+	}
+	
 }
 
