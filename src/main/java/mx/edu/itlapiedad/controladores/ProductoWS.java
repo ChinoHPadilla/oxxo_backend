@@ -35,6 +35,12 @@ public class ProductoWS {
 		return new ResponseEntity<Productos>(resultado, HttpStatus.CREATED);
 	}
 	
+	@GetMapping("/productos")
+	public ResponseEntity<?> consultarProductos() {
+		
+		List<Productos> resultado = servicio.consultarProductos();
+		return new ResponseEntity<List<Productos>>(resultado, HttpStatus.OK);
+	}
 	
 }
 
