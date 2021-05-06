@@ -9,7 +9,7 @@ import mx.edu.itlapiedad.dao.ProductoDAO;
 import mx.edu.itlapiedad.models.Productos;
 
 @Service
-public class ProductLogic implements ProductoService {
+public class ProductosLogic implements ProductoService {
 	
 	@Autowired
 	ProductoDAO repositorio;
@@ -29,9 +29,4 @@ public class ProductLogic implements ProductoService {
 		return repositorio.consultarProductos();
 	}
 
-<<<<<<< HEAD:src/main/java/mx/edu/itlapiedad/services/ProductLogic.java
 }
-	
-=======
-}
->>>>>>> 4a91a88ab2ce507c76fe464d9d076ce01090074e:src/main/java/mx/edu/itlapiedad/services/ProductosLogic.java
