@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class Mensaje {
 	
 	@GetMapping("/hola")
-	public String mostrarHola(@RequestParam String nombre) {
-		return "Hola " + nombre;
+	public String mostrarHola(@RequestParam String nombreP) {
+		return "Hola " + nombreP;
 	}
 
 }
