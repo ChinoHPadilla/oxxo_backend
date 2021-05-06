@@ -56,5 +56,21 @@ public class ProductoJDBC implements ProductoDAO {
 		});
 	}
 	
+	@Override
+	public Productos buscar(int id) {
+	String sql_query = "SELECT * FROM productos WHERE id = ?";
+	return conexion.queryForObject(sql_query, new RowMapper<Productos>() {
+	public Productos mapRow(ResultSet rs, int rowNum) throws SQLException{
+	Productos producto = new Productos();
+	producto.setId(rs.getInt("id"));
+	producto.setDescripcion(rs.getString("descripcion"));
+	producto.setPrecio(rs.getFloat("precio"));
+	producto.setCodigo_barras(rs.getString("codigo_barras"));
+	producto.setExistencia(rs.getInt("existencia"));
+	return producto;
+	}
+	}, id);
+	}
+	
 }
 
