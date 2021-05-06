@@ -1,4 +1,3 @@
-------ProductLogic
 package mx.edu.itlapiedad.services;
 
 import java.util.List;
