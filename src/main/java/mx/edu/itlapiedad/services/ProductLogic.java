@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import mx.edu.itlapiedad.dao.ProductoDAO;
 import mx.edu.itlapiedad.models.Productos;
 @Service
-public class ProductosLogic implements ProductoService {
+public class ProductLogic implements ProductoService {
 	
 	@Autowired
 	ProductoDAO repositorio;
@@ -29,4 +29,4 @@ public class ProductosLogic implements ProductoService {
 	}
 
 }
-	}
+	
