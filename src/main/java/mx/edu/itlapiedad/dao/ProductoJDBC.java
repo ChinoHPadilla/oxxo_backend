@@ -46,6 +46,7 @@ public class ProductoJDBC implements ProductoDAO {
 		Number id = insert.executeAndReturnKey(datos);
 		producto.setId(id.intValue());
 		return producto;
+<<<<<<< Updated upstream
 		
 	}*/
 	
