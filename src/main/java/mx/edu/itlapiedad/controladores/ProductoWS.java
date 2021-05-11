@@ -17,7 +17,7 @@ import mx.edu.itlapiedad.models.Productos;
 import mx.edu.itlapiedad.services.ProductoService;
 
 @RestController
-@RequestMapping("/devops")
+@RequestMapping("/devops/oxxo")
 public class ProductoWS {
 	
 	@Autowired
