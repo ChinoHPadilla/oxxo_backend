@@ -5,15 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -28,27 +25,6 @@ public class ProductoJDBC implements ProductoDAO {
 	@Autowired
 	JdbcTemplate conexion;
 	
-	/*
-	 * No funciona
-	@Override
-	public Productos insertar(Productos producto) {
-		SimpleJdbcInsert insert = new SimpleJdbcInsert(conexion)
-				.withTableName("productos")
-				.usingColumns("id","descripcion","precio","codigo_barras",
-						"existencia")
-				.usingGeneratedKeyColumns("id");
-		Map<String, Object> datos = new HashMap<>();
-		datos.put("id", producto.getId());
-		datos.put("descripcion", producto.getDescripcion());
-		datos.put("precio", producto.getPrecio());
-		datos.put("codigo_barras", producto.getCodigo_barras());
-		datos.put("existencia", producto.getExistencia());
-		Number id = insert.executeAndReturnKey(datos);
-		producto.setId(id.intValue());
-		return producto;
-<<<<<<< Updated upstream
-		
-	}*/
 	
 	public Productos insertar(final Productos producto) {
 		KeyHolder holder = new GeneratedKeyHolder();
@@ -100,6 +76,22 @@ public class ProductoJDBC implements ProductoDAO {
 				return producto;
 			}
 		}, id);
+	}
+	
+	@Override
+	public void actualizar(Productos producto) {
+		String sql_update = "UPDATE productos SET descripcion=?, precio=?, codigo_barras=?, existencia=? WHERE id=?";
+		conexion.update(sql_update, producto.getDescripcion(),
+				producto.getPrecio(),
+				producto.getCodigo_barras(),
+				producto.getExistencia(),
+				producto.getId());
+	}
+
+	@Override
+	public void eliminar(int id) {
+		String sql_update = "DELETE from productos WHERE id = ?";
+		conexion.update(sql_update, id);
 	}
 	
 }
