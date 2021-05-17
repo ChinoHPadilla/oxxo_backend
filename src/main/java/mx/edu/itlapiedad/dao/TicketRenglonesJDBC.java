@@ -21,30 +21,29 @@ import mx.edu.itlapiedad.models.TicketRenglones;
 @Repository
 public class TicketRenglonesJDBC implements TicketRenglonesDAO{
 	
-	private final String INSERT_SQL = "INSERT INTO ticket_renglones(id,TICKET_id,PRODUCTO_id,cantidad,precio,importe) values(?,?,?,?,?,?)";
+	private final String INSERT_SQL = "INSERT INTO ticket_renglones(id,TICKET_id,PRODUCTO_id,cantidad,precio) values(?,?,?,?,?)";
 	
 	@Autowired
 	JdbcTemplate conexion;
 
-	public TicketRenglones insertar(final TicketRenglones ticketRenglones) {
+	public TicketRenglones insertar(final TicketRenglones ticketRenglon) {
 		KeyHolder holder = new GeneratedKeyHolder();
 		conexion.update(new PreparedStatementCreator() {
 			@Override
 			public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 				PreparedStatement ps = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS);
-				ps.setLong(1, ticketRenglones.getId());
-				ps.setLong(2, ticketRenglones.getId_ticket());
-				ps.setLong(3, ticketRenglones.getId_producto());
-				ps.setLong(4, ticketRenglones.getCantidad());
-				ps.setFloat(5, ticketRenglones.getPrecio());
-				ps.setFloat(6, ticketRenglones.getImporte());
+				ps.setLong(1, ticketRenglon.getId());
+				ps.setLong(2, ticketRenglon.getTICKET_id());
+				ps.setLong(3, ticketRenglon.getPRODUCTO_id());
+				ps.setLong(4, ticketRenglon.getCantidad());
+				ps.setFloat(5, ticketRenglon.getPrecio());
 				return ps;
 			}
 		}, holder);
 
 		int newUserId = holder.getKey().intValue();
-		ticketRenglones.setId(newUserId);
-		return ticketRenglones;
+		ticketRenglon.setId(newUserId);
+		return ticketRenglon;
 	}
 
 	@Override
@@ -52,14 +51,14 @@ public class TicketRenglonesJDBC implements TicketRenglonesDAO{
 		String sql_query = "SELECT * FROM ticket_renglones";
 		return conexion.query(sql_query, new RowMapper<TicketRenglones>() {
 			public TicketRenglones mapRow(ResultSet rs, int rowNum) throws SQLException{
-				TicketRenglones ticketRenglones = new TicketRenglones();
-				ticketRenglones.setId(rs.getInt("id"));
-				ticketRenglones.setId_ticket(rs.getInt("TICKET_id"));
-				ticketRenglones.setId_producto(rs.getInt("PRODUCTO_id"));
-				ticketRenglones.setCantidad(rs.getInt("cantidad"));
-				ticketRenglones.setPrecio(rs.getFloat("precio"));
-				ticketRenglones.setImporte(rs.getFloat("importe"));
-				return ticketRenglones;
+				TicketRenglones ticketRenglon = new TicketRenglones();
+				ticketRenglon.setId(rs.getInt("id"));
+				ticketRenglon.setTICKET_id(rs.getInt("TICKET_id"));
+				ticketRenglon.setPRODUCTO_id(rs.getInt("PRODUCTO_id"));
+				ticketRenglon.setCantidad(rs.getInt("cantidad"));
+				ticketRenglon.setPrecio(rs.getFloat("precio"));
+				ticketRenglon.setImporte(rs.getFloat("importe"));
+				return ticketRenglon;
 			}
 		});
 	}
@@ -69,28 +68,28 @@ public class TicketRenglonesJDBC implements TicketRenglonesDAO{
 		String sql_query = "SELECT * FROM ticket_renglones WHERE id = ?";
 		return conexion.queryForObject(sql_query, new RowMapper<TicketRenglones>() {
 			public TicketRenglones mapRow(ResultSet rs, int rowNum) throws SQLException{
-				TicketRenglones ticketRenglones = new TicketRenglones();
-				ticketRenglones.setId(rs.getInt("id"));
-				ticketRenglones.setId_ticket(rs.getInt("TICKET_id"));
-				ticketRenglones.setId_producto(rs.getInt("PRODUCTO_id"));
-				ticketRenglones.setCantidad(rs.getInt("cantidad"));
-				ticketRenglones.setPrecio(rs.getFloat("precio"));
-				ticketRenglones.setImporte(rs.getFloat("importe"));
-				return ticketRenglones;
+				TicketRenglones ticketRenglon = new TicketRenglones();
+				ticketRenglon.setId(rs.getInt("id"));
+				ticketRenglon.setTICKET_id(rs.getInt("TICKET_id"));
+				ticketRenglon.setPRODUCTO_id(rs.getInt("PRODUCTO_id"));
+				ticketRenglon.setCantidad(rs.getInt("cantidad"));
+				ticketRenglon.setPrecio(rs.getFloat("precio"));
+				ticketRenglon.setImporte(rs.getFloat("importe"));
+				return ticketRenglon;
 			}
 		}, id);
 	}
 
 	@Override
-	public void actualizar(TicketRenglones ticketRenglones) {
+	public void actualizar(TicketRenglones ticketRenglon) {
 		String sql_update = "UPDATE ticket_renglones SET TICKET_id=?, PRODUCTO_id=?, cantidad=?, precio=?, importe=? WHERE id=?";
 		conexion.update(sql_update, 
-				ticketRenglones.getId_ticket(),
-				ticketRenglones.getId_producto(),
-				ticketRenglones.getCantidad(),
-				ticketRenglones.getPrecio(),
-				ticketRenglones.getImporte(),
-				ticketRenglones.getId());
+				ticketRenglon.getTICKET_id(),
+				ticketRenglon.getPRODUCTO_id(),
+				ticketRenglon.getCantidad(),
+				ticketRenglon.getPrecio(),
+				ticketRenglon.getImporte(),
+				ticketRenglon.getId());
 		
 	}
 

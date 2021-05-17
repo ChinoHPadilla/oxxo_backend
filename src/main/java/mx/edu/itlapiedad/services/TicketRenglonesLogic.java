@@ -15,8 +15,8 @@ public class TicketRenglonesLogic implements TicketRenglonesService {
 	TicketRenglonesDAO repositorio;
 	
 	@Override
-	public TicketRenglones insertar(TicketRenglones ticketRenglones) {
-		return repositorio.insertar(ticketRenglones);
+	public TicketRenglones insertar(TicketRenglones ticketRenglon) {
+		return repositorio.insertar(ticketRenglon);
 	}
 
 	@Override
@@ -30,8 +30,8 @@ public class TicketRenglonesLogic implements TicketRenglonesService {
 	}
 
 	@Override
-	public void actualizar(TicketRenglones ticketRenglones) {
-		repositorio.actualizar(ticketRenglones);
+	public void actualizar(TicketRenglones ticketRenglon) {
+		repositorio.actualizar(ticketRenglon);
 		
 	}
 
