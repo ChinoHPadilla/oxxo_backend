@@ -26,7 +26,7 @@ public class TicketRenglonesJDBC implements TicketRenglonesDAO{
 	@Autowired
 	JdbcTemplate conexion;
 
-	public TicketRenglones insertar(TicketRenglones ticketRenglones) {
+	public TicketRenglones insertar(final TicketRenglones ticketRenglones) {
 		KeyHolder holder = new GeneratedKeyHolder();
 		conexion.update(new PreparedStatementCreator() {
 			@Override

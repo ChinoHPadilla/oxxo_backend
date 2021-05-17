@@ -31,6 +31,7 @@ public class TicketRenglonesWS {
 		try {
 			resultado = servicio.insertar(ticketRenglones);			
 		} catch (DataAccessException e) {
+			System.out.println(e.getMessage());
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
 		return new ResponseEntity<TicketRenglones>(resultado, HttpStatus.CREATED);
