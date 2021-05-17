@@ -15,54 +15,54 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.edu.itlapiedad.models.Productos;
-import mx.edu.itlapiedad.services.ProductoService;
+import mx.edu.itlapiedad.models.Tickets;
+import mx.edu.itlapiedad.services.TicketService;
 
 @RestController
-@RequestMapping("/devops/oxxo/productos")
-public class ProductoWS {
-	
+@RequestMapping("/devops/oxxo/tickets")
+public class TicketsWS {
+
 	@Autowired
-	ProductoService servicio;
+	TicketService servicio;
 	
 	@PostMapping()
-	public ResponseEntity<?> insertar(@RequestBody Productos producto){
-		Productos resultado = null;
+	public ResponseEntity<?> insertar(@RequestBody Tickets ticket){
+		Tickets resultado = null;
 		try {
-			resultado = servicio.insertar(producto);			
+			resultado = servicio.insertar(ticket);			
 		} catch (DataAccessException e) {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
-		return new ResponseEntity<Productos>(resultado, HttpStatus.CREATED);
+		return new ResponseEntity<Tickets>(resultado, HttpStatus.CREATED);
 	}
 	
 	@GetMapping()
-	public ResponseEntity<?> consultarProductos() {
+	public ResponseEntity<?> consultarTickets() {
 		
-		List<Productos> resultado = servicio.consultarProductos();
-		return new ResponseEntity<List<Productos>>(resultado, HttpStatus.OK);
+		List<Tickets> resultado = servicio.consultarTickets();
+		return new ResponseEntity<List<Tickets>>(resultado, HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> buscar(@PathVariable int id){
-		Productos resultado;
+		Tickets resultado;
 		try {
 			resultado = servicio.buscar(id);
 			
 		}catch(DataAccessException e) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<Productos>(resultado,HttpStatus.OK);
+		return new ResponseEntity<Tickets>(resultado,HttpStatus.OK);
 	}
 	
 	@PutMapping()
-	public ResponseEntity<?> actualizar(@RequestBody Productos producto){
+	public ResponseEntity<?> actualizar(@RequestBody Tickets ticket){
 		try {
-			servicio.actualizar(producto);
+			servicio.actualizar(ticket);
 			
 		} catch (DataAccessException e) {
 			System.out.println(e.getMessage());
-			System.out.print(producto.toString());
+			System.out.print(ticket.toString());
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
 		return new ResponseEntity<>(HttpStatus.CREATED);
@@ -77,10 +77,7 @@ public class ProductoWS {
 		}catch(DataAccessException e) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<Productos>(HttpStatus.OK);
+		return new ResponseEntity<Tickets>(HttpStatus.OK);
 	}
 	
-	
-	
 }
-

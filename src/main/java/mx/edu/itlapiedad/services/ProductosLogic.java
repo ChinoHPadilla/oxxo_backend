@@ -28,5 +28,15 @@ public class ProductosLogic implements ProductoService {
 	public List<Productos> consultarProductos() {
 		return repositorio.consultarProductos();
 	}
+	
+	@Override
+	public void eliminar(int id) {
+		repositorio.eliminar(id);
+	}
+	
+	@Override
+	public void actualizar(Productos producto) {
+		repositorio.actualizar(producto);
+	}
 
 }
