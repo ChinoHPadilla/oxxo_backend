@@ -6,13 +6,13 @@ import mx.edu.itlapiedad.models.TicketRenglones;
 
 public interface TicketRenglonesService {
 
-	TicketRenglones insertar(TicketRenglones ticketRenglon);
+	TicketRenglones insertar(TicketRenglones ticketRenglones);
 
 	List<TicketRenglones> consultarTicketRenglones();
 
 	TicketRenglones buscar(int id);
 
-	void actualizar(TicketRenglones ticketRenglon);
+	void actualizar(TicketRenglones ticketRenglones);
 
 	void eliminar(int id);
 

@@ -26,10 +26,10 @@ public class TicketRenglonesWS {
 	TicketRenglonesService servicio;
 	
 	@PostMapping()
-	public ResponseEntity<?> insertar(@RequestBody TicketRenglones ticketRenglon){
+	public ResponseEntity<?> insertar(@RequestBody TicketRenglones ticketRenglones){
 		TicketRenglones resultado = null;
 		try {
-			resultado = servicio.insertar(ticketRenglon);			
+			resultado = servicio.insertar(ticketRenglones);			
 		} catch (DataAccessException e) {
 			System.out.println(e.getMessage());
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
@@ -57,13 +57,13 @@ public class TicketRenglonesWS {
 	}
 	
 	@PutMapping()
-	public ResponseEntity<?> actualizar(@RequestBody TicketRenglones ticketRenglon){
+	public ResponseEntity<?> actualizar(@RequestBody TicketRenglones ticketRenglones){
 		try {
-			servicio.actualizar(ticketRenglon);
+			servicio.actualizar(ticketRenglones);
 			
 		} catch (DataAccessException e) {
 			System.out.println(e.getMessage());
-			System.out.print(ticketRenglon.toString());
+			System.out.print(ticketRenglones.toString());
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
 		return new ResponseEntity<>(HttpStatus.CREATED);
