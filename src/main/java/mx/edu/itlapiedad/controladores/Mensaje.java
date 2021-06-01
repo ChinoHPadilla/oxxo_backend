@@ -11,7 +11,7 @@ public class Mensaje {
 	
 	@GetMapping("/hola")
 	public String mostrarHola(@RequestParam String nombreP) {
-		return "Hola " + nombreP;
+		return "Hola, buenas tardes" + nombreP;
 	}
 
 }
