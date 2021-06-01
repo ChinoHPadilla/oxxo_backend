@@ -6,7 +6,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import mx.edu.itlapiedad.OxxoBackendApplication;
 
 @SpringBootTest(classes = OxxoBackendApplication.class)
-@WebIntegrationTest
 class OxxoBackendApplicationTests {
 
 	@Test
