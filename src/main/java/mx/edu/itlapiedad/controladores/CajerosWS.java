@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import mx.edu.itlapiedad.models.Cajeros;
 import mx.edu.itlapiedad.services.CajeroService;
 
+/*Servicios cajeros*/
 @RestController
 @RequestMapping("/devops/oxxo/cajeros")
 public class CajerosWS {
