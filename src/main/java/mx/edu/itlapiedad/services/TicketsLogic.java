@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import mx.edu.itlapiedad.dao.TIcketDAO;
 import mx.edu.itlapiedad.models.Tickets;
+import mx.edu.itlapiedad.models.TicketsImporteTotal;
 
 @Service
 public class TicketsLogic implements TicketService {
@@ -37,6 +38,11 @@ public class TicketsLogic implements TicketService {
 	@Override
 	public void actualizar(Tickets ticket) {
 		repositorio.actualizar(ticket);
+	}
+
+	@Override
+	public TicketsImporteTotal importe_total(int id, String fecha_hora) {
+		return repositorio.importe_total(id, fecha_hora);
 	}
 	
 }

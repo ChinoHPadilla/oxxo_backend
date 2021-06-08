@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.edu.itlapiedad.models.Tickets;
+import mx.edu.itlapiedad.models.TicketsImporteTotal;
 import mx.edu.itlapiedad.services.TicketService;
 
 @RestController
@@ -78,6 +79,21 @@ public class TicketsWS {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<Tickets>(HttpStatus.OK);
+	}
+	
+	@GetMapping("/importe_total/id_cajero={id_cajero}&fecha={fecha_hora}")
+	public ResponseEntity<?> importe_total(@PathVariable int id_cajero, @PathVariable String fecha_hora){
+		TicketsImporteTotal resultado;
+		try {
+			resultado = servicio.importe_total(id_cajero,fecha_hora);
+			System.out.print(fecha_hora);
+			
+		}catch(DataAccessException e) {
+			System.out.println(e.getMessage());
+			System.out.print(fecha_hora);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<TicketsImporteTotal>(resultado,HttpStatus.OK);
 	}
 	
 }

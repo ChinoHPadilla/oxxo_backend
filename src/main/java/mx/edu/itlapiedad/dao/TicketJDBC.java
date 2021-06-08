@@ -16,6 +16,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import mx.edu.itlapiedad.models.Tickets;
+import mx.edu.itlapiedad.models.TicketsImporteTotal;
 
 @Repository
 public class TicketJDBC implements TIcketDAO{
@@ -88,6 +89,20 @@ private final String INSERT_SQL = "INSERT INTO tickets(id,fecha_hora,total,CAJER
 	public void eliminar(int id) {
 		String sql_update = "DELETE from tickets WHERE id = ?";
 		conexion.update(sql_update, id);
+	}
+
+	@Override
+	public TicketsImporteTotal importe_total(int id, String fecha_hora) {
+		String sql_query = "SELECT c.id, t.fecha_hora, sum(t_r.importe) as importe_total FROM tickets as t join ticket_renglones as t_r on t_r.TICKET_id = t.id join cajeros as c on c.id = t.CAJERO_id WHERE c.id = ? and t.fecha_hora = ?";
+		return conexion.queryForObject(sql_query, new RowMapper<TicketsImporteTotal>() {
+			public TicketsImporteTotal mapRow(ResultSet rs, int rowNum) throws SQLException{
+				TicketsImporteTotal ticket_importe_total = new TicketsImporteTotal();
+				ticket_importe_total.setId(rs.getInt("id"));
+				ticket_importe_total.setImporte_total(rs.getFloat("importe_total"));
+				ticket_importe_total.setFecha_hora(rs.getString("fecha_hora"));
+				return ticket_importe_total;
+			}
+		}, id,fecha_hora);
 	}
 	
 }
